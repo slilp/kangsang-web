@@ -1,9 +1,9 @@
-import { TextField } from "@mui/material";
+import { Button } from "kangsang-mui";
 
 export default function Home() {
   return (
     <div>
-      <TextField />
+      <Button variant="contained">HELLO WORLD</Button>
     </div>
   );
 }

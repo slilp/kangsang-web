@@ -1,37 +1,21 @@
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { CssBaseline } from "@mui/material";
-import React, { useMemo } from "react";
+import { createTheme, Theme } from "@mui/material/styles";
+import OverridesComponents from "./overrides";
+import { DARK_PALETTE, LIGHT_PALETTE } from "./palette";
 
-const lightTheme = createTheme({
-  palette: {
-    mode: "light",
-    primary: {
-      main: "#d21919",
-    },
-    secondary: {
-      main: "#d21919",
-    },
-    background: {
-      default: "##d21919",
-      paper: "#d21919",
-    },
-  },
-});
+export const dynamicTheme = (mode: "dark" | "light") => {
+  const selectedPalette = mode === "dark" ? DARK_PALETTE : LIGHT_PALETTE;
 
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-    primary: {
-      main: "#000000",
+  const theme: Theme = createTheme({
+    palette: {
+      mode,
+      ...selectedPalette,
     },
-    secondary: {
-      main: "#000000",
+    typography: {
+      fontFamily: "'Inter Variable', sans-serif",
     },
-    background: {
-      default: "#000000",
-      paper: "#000000",
-    },
-  },
-});
+  });
 
-export { darkTheme, lightTheme };
+  theme.components = OverridesComponents(theme);
+
+  return theme;
+};

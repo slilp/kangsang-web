@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import snackbarSlice from "./snackbar";
+import themeModeSlice from "./theme";
 
 export const reducers = {
   snackbar: snackbarSlice,
+  themeMode: themeModeSlice,
 };
 
 export const makeStore = () => {
