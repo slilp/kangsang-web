@@ -22,12 +22,10 @@ export default function Login() {
           flexDirection="column"
           gap={2}
         >
-          <Typography variant="h4" fontWeight="bold">
+          <Typography variant="h5" fontWeight="bold">
             Login
           </Typography>
-          <Typography variant="body1">
-            Welcome to your admin dashboard
-          </Typography>
+          <Typography variant="body1">Welcome to Admin Dashboard</Typography>
           <TextField />
           <TextField />
           <Typography variant="body2" textAlign="right">
