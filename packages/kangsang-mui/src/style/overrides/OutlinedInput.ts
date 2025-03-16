@@ -7,6 +7,9 @@ function OutlinedInput(theme: Theme) {
         root: {
           borderRadius: "8px",
         },
+        input: {
+          padding: "12px 16px",
+        },
       },
     },
   };

@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
 import { NextIntlClientProvider, Locale, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { config } from "@fortawesome/fontawesome-svg-core";
+config.autoAddCss = false;
+
+//provider
 import NextAuthProvider from "../../providers/NextAuthProvider";
 import ReactQueryProvider from "../../providers/ReactQueryProvider";
 import ReduxProvider from "../../providers/ReduxProvider";
-import { routing } from "../../i18n/routing";
 import AppThemeProvider from "../../providers/ThemeProvider";
+import { routing } from "../../i18n/routing";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,7 +26,6 @@ export default async function RootLayout({
 }>) {
   // Ensure that the incoming `locale` is valid
   const { locale } = await params;
-  console.log("locale", locale);
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }

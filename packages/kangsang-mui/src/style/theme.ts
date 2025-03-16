@@ -1,11 +1,15 @@
 import { createTheme, Theme } from "@mui/material/styles";
-import { Inter } from "@next/font/google";
 import OverridesComponents from "./overrides";
 import { DARK_PALETTE, LIGHT_PALETTE } from "./palette";
 
-const interFont = Inter({});
+interface IThemeOptions {
+  fontFamily: string;
+}
 
-export const dynamicTheme = (mode: "dark" | "light") => {
+export const dynamicTheme = (
+  mode: "dark" | "light",
+  options: IThemeOptions
+) => {
   const selectedPalette = mode === "dark" ? DARK_PALETTE : LIGHT_PALETTE;
 
   const theme: Theme = createTheme({
@@ -14,7 +18,7 @@ export const dynamicTheme = (mode: "dark" | "light") => {
       ...selectedPalette,
     },
     typography: {
-      fontFamily: interFont.style.fontFamily,
+      fontFamily: options?.fontFamily,
     },
   });
 

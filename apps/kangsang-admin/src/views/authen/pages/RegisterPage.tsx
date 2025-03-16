@@ -3,9 +3,9 @@ import { Box, Center, FullPage, Typography } from "kangsang-mui";
 
 //components
 import LoginSocialSection from "../components/LoginSocialSection";
-import LoginFormSection from "../components/LoginFormSection";
+import RegisterFormSection from "../components/RegisterFormSection";
 
-function LoginPage() {
+function RegisterPage() {
   return (
     <FullPage>
       <Center>
@@ -19,12 +19,12 @@ function LoginPage() {
           flexDirection="column"
           gap={2}
         >
-          <LoginFormSection />
+          <RegisterFormSection />
           <LoginSocialSection />
           <Typography variant="body2">
-            Don't have an account ?{" "}
+            Already have an account ?{" "}
             <Link
-              href="/register"
+              href="/login"
               style={{
                 textDecoration: "none",
                 color: "black",
@@ -36,7 +36,7 @@ function LoginPage() {
                 fontWeight="bold"
                 sx={{ "&:hover": { opacity: 0.7 } }}
               >
-                Register now
+                Login now
               </Typography>
             </Link>
           </Typography>
@@ -46,4 +46,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default RegisterPage;

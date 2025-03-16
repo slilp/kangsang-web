@@ -8,15 +8,15 @@ import "@fontsource/material-icons";
 
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { withThemeFromJSXProvider } from "@storybook/addon-themes";
-import { lightTheme, darkTheme } from "../src/style/theme";
+import { dynamicTheme } from "../src/style/theme";
 
 const preview: Preview = {
   parameters: {},
   decorators: [
     withThemeFromJSXProvider({
       themes: {
-        light: lightTheme,
-        dark: darkTheme,
+        light: dynamicTheme("light"),
+        dark: dynamicTheme("dark"),
       },
       defaultTheme: "light",
       Provider: ThemeProvider,
