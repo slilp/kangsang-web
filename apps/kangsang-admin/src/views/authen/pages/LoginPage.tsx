@@ -1,5 +1,5 @@
-import { Link } from "@/i18n/navigation";
 import { Box, Center, FullPage, Typography } from "kangsang-mui";
+import Link from "next/link";
 
 //components
 import LoginSocialSection from "../components/LoginSocialSection";

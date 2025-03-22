@@ -9,6 +9,7 @@ import {
   InputAdornment,
   TextField,
   Typography,
+  Box,
 } from "kangsang-mui";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
@@ -18,6 +19,7 @@ import {
   RegisterFormType,
   registerFormValidationSchema,
 } from "../utils/registerForm";
+import useMutateRegister from "../hooks/useMutateRegister";
 
 function RegisterFormSection() {
   const [isHidePass, setIsHidePass] = useState(true);
@@ -30,12 +32,40 @@ function RegisterFormSection() {
   const { handleSubmit, control, setValue } = useForm<RegisterFormType>({
     resolver,
   });
+
+  const registerMutate = useMutateRegister({
+    onSuccess: () => {
+      // dispatch(
+      //   openSnackbar({
+      //     open: true,
+      //     title: "สำเร็จ",
+      //     message: "ระบบได้ทำการบันทึกข้อมูลของท่านเรียบร้อยแล้ว",
+      //     severity: "success",
+      //   })
+      // );
+    },
+    onError: () => {
+      // dispatch(
+      //   openSnackbar({
+      //     open: true,
+      //     title: "ไม่สำเร็จ",
+      //     message: "ดำเนินการไม่สำเร็จกรุณาลองใหม่อีกครั้ง",
+      //     severity: "error",
+      //   })
+      // );
+    },
+  });
+
   const onSubmitRegister = (data: RegisterFormType) => {
-    console.log(data);
+    registerMutate.mutate({
+      email: data.email,
+      password: data.password,
+      displayName: data.email.split("@")[0] ?? "",
+    });
   };
 
   return (
-    <>
+    <Box component="form" display="flex" flexDirection="column" gap={2}>
       <Typography variant="h5" fontWeight="bold">
         Register
       </Typography>
@@ -122,10 +152,14 @@ function RegisterFormSection() {
           />
         )}
       />
-      <Button variant="contained" onClick={handleSubmit(onSubmitRegister)}>
+      <Button
+        type="submit"
+        variant="contained"
+        onClick={handleSubmit(onSubmitRegister)}
+      >
         <Typography variant="body1">Reay to new user!</Typography>
       </Button>
-    </>
+    </Box>
   );
 }
 

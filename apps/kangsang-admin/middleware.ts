@@ -1,15 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import createIntlMiddleware from "next-intl/middleware";
 import { withAuth } from "next-auth/middleware";
 import { getToken } from "next-auth/jwt";
 import { validatePublicPage, validateNoAuthPage } from "./src/utils/middleware";
-import { routing } from "./src/i18n/routing";
-
-const intlMiddleware = createIntlMiddleware(routing);
 
 const authMiddleware = withAuth(
   function onSuccess(req) {
-    return intlMiddleware(req);
+    return NextResponse.next();
   },
   {
     callbacks: {
@@ -33,13 +29,13 @@ export default async function middleware(req: NextRequest) {
       return NextResponse.redirect(new URL("/", req.url));
     }
   }
-  console.log("isPublicPage", isPublicPage);
   if (isPublicPage) {
-    return intlMiddleware(req);
+    return NextResponse.next();
   } else {
     return (authMiddleware as any)(req);
   }
 }
+
 export const config = {
-  matcher: ["/((?!api|_next|.*\\..*).*)"],
+  matcher: ["/((?!api|_next|.*\\..*).*)"], // Match all pages except API routes, static files, etc.
 };
