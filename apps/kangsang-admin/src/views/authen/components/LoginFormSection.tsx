@@ -1,5 +1,7 @@
 "use client";
 
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, Resolver, useForm } from "react-hook-form";
@@ -16,9 +18,9 @@ import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
 
 // util
 import { LoginFormType, loginFormValidationSchema } from "../utils/loginForm";
-import useMutateLogin from "../hooks/useMutateLogin";
 
 function LoginFormSection() {
+  const router = useRouter();
   const [isHidePass, setIsHidePass] = useState(true);
 
   const resolver: Resolver<LoginFormType> = yupResolver(
@@ -29,33 +31,17 @@ function LoginFormSection() {
     resolver,
   });
 
-  const loginMutate = useMutateLogin({
-    onSuccess: () => {
-      // dispatch(
-      //   openSnackbar({
-      //     open: true,
-      //     title: "สำเร็จ",
-      //     message: "ระบบได้ทำการบันทึกข้อมูลของท่านเรียบร้อยแล้ว",
-      //     severity: "success",
-      //   })
-      // );
-    },
-    onError: () => {
-      // dispatch(
-      //   openSnackbar({
-      //     open: true,
-      //     title: "ไม่สำเร็จ",
-      //     message: "ดำเนินการไม่สำเร็จกรุณาลองใหม่อีกครั้ง",
-      //     severity: "error",
-      //   })
-      // );
-    },
-  });
-
   const onSubmitLogin = (data: LoginFormType) => {
-    loginMutate.mutate({
+    signIn("credentials", {
       email: data.email,
       password: data.password,
+      redirect: false,
+    }).then((res) => {
+      if (res?.ok) {
+        router.push("/");
+      } else {
+        // setError(true);
+      }
     });
   };
 

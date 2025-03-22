@@ -1,13 +1,8 @@
 import type { Metadata } from "next";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
+import WithProviders from "@/views";
 config.autoAddCss = false;
-
-//provider
-import NextAuthProvider from "@/providers/NextAuthProvider";
-import ReactQueryProvider from "@/providers/ReactQueryProvider";
-import ReduxProvider from "@/providers/ReduxProvider";
-import AppThemeProvider from "@/providers/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,15 +15,9 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html>
+    <html lang="en">
       <body>
-        <NextAuthProvider>
-          <ReactQueryProvider>
-            <ReduxProvider>
-              <AppThemeProvider>{children}</AppThemeProvider>{" "}
-            </ReduxProvider>
-          </ReactQueryProvider>
-        </NextAuthProvider>
+        <WithProviders>{children}</WithProviders>
       </body>
     </html>
   );
