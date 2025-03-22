@@ -1,11 +1,11 @@
 "use client";
 
-import { Button } from "kangsang-mui";
+import { Button, Box } from "kangsang-mui";
 import { signOut } from "next-auth/react";
 
 export default function Home() {
   return (
-    <div>
+    <Box>
       <Button
         onClick={() => {
           signOut();
@@ -13,6 +13,6 @@ export default function Home() {
       >
         Sign out
       </Button>
-    </div>
+    </Box>
   );
 }
