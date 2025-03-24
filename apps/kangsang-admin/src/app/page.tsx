@@ -1,18 +1,10 @@
-"use client";
-
-import { Button, Box } from "kangsang-mui";
-import { signOut } from "next-auth/react";
+import MainLayout from "@/components/MainLayout";
+import DashboardPage from "@/views/main/page/DashboardPage";
 
 export default function Home() {
   return (
-    <Box>
-      <Button
-        onClick={() => {
-          signOut();
-        }}
-      >
-        Sign out
-      </Button>
-    </Box>
+    <MainLayout>
+      <DashboardPage />
+    </MainLayout>
   );
 }

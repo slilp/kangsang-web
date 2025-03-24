@@ -6,10 +6,12 @@ export const validatePublicPage = (pathname: string): boolean => {
     `^(/(${LOCALES.join("|")}))?(${PUBLIC_PAGES.join("|")})?/?$`,
     "i"
   );
-  return false;
-  // pathname !== "/" &&
-  // pathname !== "/en" &&
-  // pathname !== "/th"
+  return (
+    publicPathnameRegex &&
+    pathname !== "/" &&
+    pathname !== "/en" &&
+    pathname !== "/th"
+  );
 };
 
 export const validateNoAuthPage = (pathname: string): boolean => {

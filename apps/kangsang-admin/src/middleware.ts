@@ -26,6 +26,8 @@ export default async function middleware(req: NextRequest) {
     const token = await getToken({ req });
     if (!!token) {
       return NextResponse.redirect(new URL("/", req.url));
+    } else {
+      return NextResponse.next();
     }
   }
   if (isPublicPage) {
