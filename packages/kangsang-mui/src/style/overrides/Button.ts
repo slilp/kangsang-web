@@ -6,7 +6,7 @@ function Button(theme: Theme) {
       styleOverrides: {
         root: {
           borderRadius: "8px",
-          padding: "0.5rem 1rem ",
+          padding: "0.75rem 1rem",
           boxShadow: "none",
           textTransform: "none",
           variants: [

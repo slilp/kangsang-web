@@ -3,6 +3,7 @@
 import React, { useMemo, useState } from "react";
 import { Box, Container, Toolbar } from "kangsang-mui";
 import NavBar from "./NavBar";
+import SideBar from "./SideBar";
 // import SideBar from "./SideBar";
 
 interface MainLayoutProp {
@@ -20,13 +21,12 @@ function MainLayout({ children }: MainLayoutProp) {
         drawerWidth={drawerWidth}
         setExpandMobileMenu={setExpandMobileMenu}
       />
-
-      {/* <SideBar
+      <SideBar
         expandMenu={expandMenu}
         setExpandMenu={setExpandMenu}
         expandMobileMenu={expandMobileMenu}
         setExpandMobileMenu={setExpandMobileMenu}
-      /> */}
+      />
       <Box
         sx={{
           width: {

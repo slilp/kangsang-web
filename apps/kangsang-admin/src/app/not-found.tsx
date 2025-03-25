@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function NotFound() {
   return (
     <FullPage>
-      <Center flexDirection="column">
+      <Center flexDirection="column" p={2}>
         <Typography variant="h2" fontWeight="bold" gutterBottom>
           404
         </Typography>

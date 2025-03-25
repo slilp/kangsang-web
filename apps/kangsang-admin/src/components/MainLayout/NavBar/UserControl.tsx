@@ -69,33 +69,40 @@ function UserControl() {
               </Typography>
             </ListItem>
             <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <FontAwesomeIcon icon={faGear} />
-                </ListItemIcon>
-                <ListItemText>
-                  <Typography variant="body2">Settings</Typography>
-                </ListItemText>
-              </ListItemButton>
+              <Button
+                fullWidth
+                sx={{
+                  color: "text.secondary",
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
+              >
+                <FontAwesomeIcon icon={faGear} />
+                <Typography variant="body2">Settings</Typography>
+                <Box />
+              </Button>
             </ListItem>
           </List>
           <Divider sx={{ borderStyle: "dashed" }} />
           <List>
             <ListItem disablePadding>
-              <ListItemButton
+              <Button
+                fullWidth
+                sx={{
+                  color: "text.secondary",
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
                 onClick={() =>
                   signOut({
                     callbackUrl: "/login",
                   })
                 }
               >
-                <ListItemIcon>
-                  <FontAwesomeIcon icon={faRightFromBracket} />
-                </ListItemIcon>
-                <ListItemText>
-                  <Typography variant="body2">Logout</Typography>
-                </ListItemText>
-              </ListItemButton>
+                <FontAwesomeIcon icon={faRightFromBracket} />
+                <Typography variant="body2">Logout</Typography>
+                <Box />
+              </Button>
             </ListItem>
           </List>
         </Box>
