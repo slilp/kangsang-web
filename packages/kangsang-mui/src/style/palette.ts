@@ -6,6 +6,6 @@ export const LIGHT_PALETTE = {
 
 export const DARK_PALETTE = {
   background: {
-    default: "#000",
+    default: "#141A21",
   },
 };

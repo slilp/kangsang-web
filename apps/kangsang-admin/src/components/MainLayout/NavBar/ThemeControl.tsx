@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 
 import { changeTheme } from "@/redux/theme";
+import { setThemeStorage } from "@/utils/storage";
 
 function ThemeControl() {
   const dispatch = useAppDispatch();
@@ -22,7 +23,10 @@ function ThemeControl() {
             width: 40,
             height: 40,
           }}
-          onClick={() => dispatch(changeTheme(true))}
+          onClick={() => {
+            setThemeStorage("dark");
+            dispatch(changeTheme(true));
+          }}
         >
           <FontAwesomeIcon icon={faMoon} />
         </IconButton>
@@ -40,7 +44,10 @@ function ThemeControl() {
           width: 40,
           height: 40,
         }}
-        onClick={() => dispatch(changeTheme(false))}
+        onClick={() => {
+          setThemeStorage("light");
+          dispatch(changeTheme(false));
+        }}
       >
         <FontAwesomeIcon icon={faSun} />
       </IconButton>
