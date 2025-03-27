@@ -23,7 +23,7 @@ import UserControl from "./UserControl";
 
 interface NavBarProps {
   drawerWidth: number;
-  setExpandMobileMenu: (value: boolean) => void;
+  setExpandMobileMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function NavBar({ drawerWidth, setExpandMobileMenu }: NavBarProps) {

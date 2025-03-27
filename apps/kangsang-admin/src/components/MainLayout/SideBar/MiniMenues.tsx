@@ -1,28 +1,23 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import {
   Typography,
   Stack,
-  Icon,
   List,
   Divider,
   ListItemText,
   ListItemIcon,
-  Box,
-  Button,
   Popover,
   ListItemButton,
-  ListItem,
+  Box,
 } from "kangsang-mui";
-import {
-  faChevronDown,
-  faChevronRight,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { IMainNavMenu, navMenus } from "./navMenus";
+import MiniMenuButton from "./MiniMenuButton";
+import { validateMainMenuPath, validateSubMenuPath } from "@/utils/path";
+import SubMenuButton from "./SubMenuButton";
 
 interface MiniMenusProps {
   role: string;
@@ -30,50 +25,33 @@ interface MiniMenusProps {
 
 function MiniMenus({ role }: MiniMenusProps) {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-  const [selectMenu, setSelectMenu] = useState<IMainNavMenu[]>([]);
-
+  const [selectMenu, setSelectMenu] = useState<any[]>([]);
+  const pathname = usePathname();
   const router = useRouter();
 
-  const onOpenPopover = (
-    event: React.MouseEvent<HTMLButtonElement>,
-    menus: IMainNavMenu[]
-  ) => {
+  const onOpenPopover = (event: any, menus: any[]) => {
     setAnchorEl(event.currentTarget);
     setSelectMenu(menus);
   };
   return (
-    <Stack px={1} mt={1}>
+    <Stack px={1} mt={2}>
       {navMenus.map((navMenu, index) =>
         navMenu.roles.length === 0 || navMenu.roles.includes(role) ? (
           <List key={`navMenu-${navMenu.id}`} sx={{ p: 0 }}>
             {navMenu.mainMenus.map((menu: IMainNavMenu) => {
               return (
-                <Button
+                <MiniMenuButton
                   key={`mainmenu-${menu.id}`}
-                  fullWidth
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "text.secondary",
-                    position: "relative",
-                    gap: 0.5,
-                  }}
                   onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
                     menu?.subMenus
-                      ? onOpenPopover(e, menu.subMenus as IMainNavMenu[])
+                      ? onOpenPopover(e, menu.subMenus as any[])
                       : router.push(menu.path)
                   }
-                >
-                  <FontAwesomeIcon icon={menu.icon} />
-                  <Typography variant="body2">{menu.title}</Typography>
-                  {menu.subMenus && (
-                    <Box position="absolute" right="2px">
-                      <FontAwesomeIcon icon={faChevronRight} size="xs" />
-                    </Box>
-                  )}
-                </Button>
+                  icon={menu.icon}
+                  label={menu.title}
+                  isSelected={validateMainMenuPath(pathname, menu.path)}
+                  isShowSubMenu={!!menu.subMenus}
+                />
               );
             })}
             {!(index + 1 === navMenus.length) && <Divider sx={{ my: 0.5 }} />}
@@ -93,24 +71,21 @@ function MiniMenus({ role }: MiniMenusProps) {
           horizontal: "left",
         }}
       >
-        <List sx={{ p: 0.5 }}>
+        <Box p={0.5} display="flex" flexDirection="column" gap={0.5}>
           {selectMenu?.map((subMenu, index) =>
             subMenu.roles.length === 0 || subMenu.roles.includes(role) ? (
-              <ListItem key={`submenu-${subMenu.id}`} disablePadding>
-                <Button
-                  fullWidth
-                  onClick={() => {
-                    router.push(subMenu.path);
-                    setAnchorEl(null);
-                  }}
-                  sx={{ color: "text.secondary" }}
-                >
-                  <Typography variant="body2">{subMenu.title}</Typography>
-                </Button>
-              </ListItem>
+              <SubMenuButton
+                key={`submenu-${subMenu.id}`}
+                label={subMenu.title}
+                onClick={() => {
+                  router.push(subMenu.path);
+                  setAnchorEl(null);
+                }}
+                isSelected={validateSubMenuPath(pathname, subMenu.path)}
+              />
             ) : null
           )}
-        </List>
+        </Box>
       </Popover>
     </Stack>
   );

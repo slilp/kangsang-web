@@ -8,7 +8,12 @@ import {
 import Menus from "./Menus";
 import MiniMenus from "./MiniMenues";
 
-function DesktopSidebar({ expandMenu, setExpandMenu }: any) {
+interface DesktopSidebarProps {
+  expandMenu: boolean;
+  setExpandMenu: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function DesktopSidebar({ expandMenu, setExpandMenu }: DesktopSidebarProps) {
   return (
     <Drawer
       variant="permanent"

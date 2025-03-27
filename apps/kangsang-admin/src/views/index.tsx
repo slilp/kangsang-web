@@ -7,6 +7,7 @@ import ReduxProvider from "@/providers/ReduxProvider";
 import AppThemeProvider from "@/providers/ThemeProvider";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
+import AppProvider from "@/providers/AppProvider";
 config.autoAddCss = false;
 
 function WithProviders({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -15,7 +16,9 @@ function WithProviders({ children }: Readonly<{ children: React.ReactNode }>) {
       <ReactQueryProvider>
         <ReduxProvider>
           <AppRouterCacheProvider>
-            <AppThemeProvider>{children}</AppThemeProvider>
+            <AppThemeProvider>
+              <AppProvider>{children}</AppProvider>
+            </AppThemeProvider>
           </AppRouterCacheProvider>
         </ReduxProvider>
       </ReactQueryProvider>

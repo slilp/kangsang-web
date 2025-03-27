@@ -5,9 +5,9 @@ import MobileSideBar from "./MobileSideBar";
 
 interface SideBarProps {
   expandMenu: boolean;
-  setExpandMenu: (value: boolean) => void;
+  setExpandMenu: React.Dispatch<React.SetStateAction<boolean>>;
   expandMobileMenu: boolean;
-  setExpandMobileMenu: (value: boolean) => void;
+  setExpandMobileMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function SideBar({

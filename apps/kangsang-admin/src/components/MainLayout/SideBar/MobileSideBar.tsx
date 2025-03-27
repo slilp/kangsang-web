@@ -1,12 +1,19 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Drawer, Typography, Box } from "kangsang-mui";
 import Menus from "./Menus";
+import { usePathname } from "next/navigation";
 
-function MobileSideBar({ expandMobileMenu, setExpandMobileMenu }: any) {
-  const navItems = ["Home", "About", "Contact"];
+interface MobileSideBarProps {
+  expandMobileMenu: boolean;
+  setExpandMobileMenu: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
+function MobileSideBar({
+  expandMobileMenu,
+  setExpandMobileMenu,
+}: MobileSideBarProps) {
   return (
     <Drawer
       variant="temporary"
@@ -24,7 +31,7 @@ function MobileSideBar({ expandMobileMenu, setExpandMobileMenu }: any) {
         Logo
       </Typography>
 
-      <Menus role="admin" />
+      <Menus role="admin" setExpandMobileMenu={setExpandMobileMenu} />
     </Drawer>
   );
 }

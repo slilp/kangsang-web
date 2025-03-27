@@ -1,4 +1,4 @@
-import { Box, Button, Center, FullPage, Typography } from "kangsang-mui";
+import { Button, Center, FullPage, Typography } from "kangsang-mui";
 import Link from "next/link";
 
 export default function NotFound() {
