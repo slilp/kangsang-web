@@ -1,10 +1,13 @@
 import type { Preview } from "@storybook/react";
-
-import "@fontsource/roboto/300.css";
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
-import "@fontsource/material-icons";
+import "@fontsource/prompt/100.css";
+import "@fontsource/prompt/200.css";
+import "@fontsource/prompt/300.css";
+import "@fontsource/prompt/400.css";
+import "@fontsource/prompt/500.css";
+import "@fontsource/prompt/600.css";
+import "@fontsource/prompt/700.css";
+import "@fontsource/prompt/800.css";
+import "@fontsource/prompt/900.css";
 
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { withThemeFromJSXProvider } from "@storybook/addon-themes";
@@ -15,8 +18,12 @@ const preview: Preview = {
   decorators: [
     withThemeFromJSXProvider({
       themes: {
-        light: dynamicTheme("light"),
-        dark: dynamicTheme("dark"),
+        light: dynamicTheme("light", {
+          fontFamily: "'Prompt', sans-serif",
+        }),
+        dark: dynamicTheme("dark", {
+          fontFamily: "'Prompt', sans-serif",
+        }),
       },
       defaultTheme: "light",
       Provider: ThemeProvider,

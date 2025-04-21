@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode, useEffect } from "react";
-import { Inter } from "next/font/google";
+import { Prompt } from "next/font/google";
 import { CssBaseline, dynamicTheme, ThemeProvider } from "kangsang-mui";
 import { useAppDispatch, useAppSelector } from "../redux/hook";
 import { getThemeStorage } from "@/utils/storage";
@@ -11,7 +11,10 @@ interface ThemeProviderProps {
   children: ReactNode;
 }
 
-const interFont = Inter({ subsets: ["latin"] });
+const promptFont = Prompt({
+  subsets: ["latin", "thai"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
 
 const AppThemeProvider = ({ children }: ThemeProviderProps) => {
   const dispatch = useAppDispatch();
@@ -27,7 +30,7 @@ const AppThemeProvider = ({ children }: ThemeProviderProps) => {
   return (
     <ThemeProvider
       theme={dynamicTheme(themeSelectorState, {
-        fontFamily: interFont.style.fontFamily,
+        fontFamily: promptFont.style.fontFamily,
       })}
     >
       <CssBaseline />

@@ -8,9 +8,6 @@ import {
   Divider,
   List,
   ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
   Popover,
   Typography,
   useTheme,
@@ -18,6 +15,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightFromBracket, faGear } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
+import { setThemeStorage } from "@/utils/storage";
 
 function UserControl() {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
@@ -32,7 +30,7 @@ function UserControl() {
     <>
       <Button
         onClick={onOpenPopover}
-        sx={{ color: "text.primary", width: "125px" }}
+        sx={{ color: "text.primary", width: { xs: "125px", md: "160px" } }}
         startIcon={
           <FontAwesomeIcon icon={faUser} color={theme.palette.text.secondary} />
         }
@@ -43,7 +41,6 @@ function UserControl() {
       </Button>
 
       <Popover
-        sx={{ width: "300px" }}
         open={Boolean(anchorEl)}
         anchorEl={anchorEl}
         onClose={() => setAnchorEl(null)}
@@ -56,7 +53,7 @@ function UserControl() {
           horizontal: "center",
         }}
       >
-        <Box sx={{ width: "100%", maxWidth: 360 }}>
+        <Box sx={{ width: { xs: "125px", md: "160px" } }}>
           <List>
             <ListItem>
               <Typography variant="body2" noWrap>
@@ -93,11 +90,13 @@ function UserControl() {
                   display: "flex",
                   justifyContent: "space-between",
                 }}
-                onClick={() =>
+                onClick={() => {
+                  setThemeStorage("light");
+
                   signOut({
                     callbackUrl: "/login",
-                  })
-                }
+                  });
+                }}
               >
                 <FontAwesomeIcon icon={faRightFromBracket} />
                 <Typography variant="body2">Logout</Typography>

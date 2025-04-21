@@ -11,7 +11,7 @@ function RegisterPage() {
       <Center>
         <Box
           borderRadius={4}
-          boxShadow={2}
+          boxShadow={3}
           p={3}
           width="350px"
           textAlign="center"

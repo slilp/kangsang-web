@@ -1,21 +1,5 @@
 import React, { useState } from "react";
-import { useSession } from "next-auth/react";
-import {
-  AppBar,
-  List,
-  ListItem,
-  Box,
-  Container,
-  IconButton,
-  Toolbar,
-  Divider,
-  ListItemText,
-  Typography,
-  ListItemIcon,
-  Button,
-  Tooltip,
-} from "kangsang-mui";
-import { useRouter } from "next/navigation";
+import { AppBar, Box, IconButton, Toolbar } from "kangsang-mui";
 import ThemeControl from "./ThemeControl";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";

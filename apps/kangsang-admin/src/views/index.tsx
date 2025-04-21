@@ -1,5 +1,3 @@
-"use client";
-
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import NextAuthProvider from "@/providers/NextAuthProvider";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";

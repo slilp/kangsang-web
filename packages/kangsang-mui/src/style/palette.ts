@@ -5,6 +5,9 @@ export const LIGHT_PALETTE = {
 };
 
 export const DARK_PALETTE = {
+  primary: {
+    main: "#ecf0f1",
+  },
   background: {
     default: "#141A21",
   },
