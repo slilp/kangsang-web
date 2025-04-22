@@ -33,7 +33,7 @@ function RegisterPage() {
               <Typography
                 variant="body2"
                 component="span"
-                fontWeight="bold"
+                fontWeight="medium"
                 sx={{ "&:hover": { opacity: 0.7 } }}
               >
                 Login now

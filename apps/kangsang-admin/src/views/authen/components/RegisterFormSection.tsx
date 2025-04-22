@@ -20,8 +20,11 @@ import {
   registerFormValidationSchema,
 } from "../utils/registerForm";
 import useMutateRegister from "../hooks/useMutateRegister";
+import { useAppDispatch } from "@/redux/hook";
+import { openSnackbar } from "@/redux/snackbar";
 
 function RegisterFormSection() {
+  const dispatch = useAppDispatch();
   const [isHidePass, setIsHidePass] = useState(true);
   const [isHideConfirmPass, setIsHideConfirmPass] = useState(true);
 
@@ -35,24 +38,24 @@ function RegisterFormSection() {
 
   const registerMutate = useMutateRegister({
     onSuccess: () => {
-      // dispatch(
-      //   openSnackbar({
-      //     open: true,
-      //     title: "สำเร็จ",
-      //     message: "ระบบได้ทำการบันทึกข้อมูลของท่านเรียบร้อยแล้ว",
-      //     severity: "success",
-      //   })
-      // );
+      dispatch(
+        openSnackbar({
+          open: true,
+          title: "Welcome our new member !",
+          message: "You have successfully registered",
+          severity: "success",
+        })
+      );
     },
     onError: () => {
-      // dispatch(
-      //   openSnackbar({
-      //     open: true,
-      //     title: "ไม่สำเร็จ",
-      //     message: "ดำเนินการไม่สำเร็จกรุณาลองใหม่อีกครั้ง",
-      //     severity: "error",
-      //   })
-      // );
+      dispatch(
+        openSnackbar({
+          open: true,
+          title: "Failed to register",
+          message: "Please try again",
+          severity: "error",
+        })
+      );
     },
   });
 
@@ -76,6 +79,7 @@ function RegisterFormSection() {
         defaultValue=""
         render={({ field: { onChange, value }, fieldState: { error } }) => (
           <TextField
+            data-testid="email-input"
             placeholder="email"
             value={value}
             helperText={error?.message}
@@ -90,6 +94,7 @@ function RegisterFormSection() {
         defaultValue=""
         render={({ field: { onChange, value }, fieldState: { error } }) => (
           <TextField
+            data-testid="password-input"
             placeholder="password"
             type={isHidePass ? "password" : "text"}
             helperText={error?.message}
@@ -105,6 +110,7 @@ function RegisterFormSection() {
                 endAdornment: (
                   <InputAdornment position="start">
                     <IconButton
+                      data-testid="open-password-btn"
                       onClick={() => setIsHidePass((prev) => !prev)}
                       size="small"
                     >
@@ -123,6 +129,7 @@ function RegisterFormSection() {
         defaultValue=""
         render={({ field: { onChange, value }, fieldState: { error } }) => (
           <TextField
+            data-testid="confirm-password-input"
             placeholder="confirm password"
             type={isHideConfirmPass ? "password" : "text"}
             helperText={error?.message}
@@ -138,6 +145,7 @@ function RegisterFormSection() {
                 endAdornment: (
                   <InputAdornment position="start">
                     <IconButton
+                      data-testid="open-confirm-password-btn"
                       onClick={() => setIsHideConfirmPass((prev) => !prev)}
                       size="small"
                     >
@@ -153,6 +161,7 @@ function RegisterFormSection() {
         )}
       />
       <Button
+        data-testid="register-btn"
         type="submit"
         variant="contained"
         onClick={handleSubmit(onSubmitRegister)}

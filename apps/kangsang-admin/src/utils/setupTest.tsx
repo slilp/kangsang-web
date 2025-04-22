@@ -3,13 +3,37 @@ import { vi } from "vitest";
 
 vi.mock("next/font/google", () => ({
   __esModule: true,
-  Roboto: vi.fn().mockReturnValue({
-    className: "roboto-mock",
-    style: { fontFamily: "Roboto" },
+  Prompt: vi.fn().mockReturnValue({
+    className: "prompt-mock",
+    style: { fontFamily: "Prompt" },
   }),
-  Inter: vi.fn().mockReturnValue({
-    className: "inter-mock",
-    style: { fontFamily: "Inter" },
+}));
+
+vi.mock("next/navigation", () => ({
+  __esModule: true,
+  useRouter: vi.fn().mockReturnValue({
+    route: "/",
+    pathname: "/",
+    query: {},
+    asPath: "/",
+    push: vi.fn(),
+    replace: vi.fn(),
+    back: vi.fn(),
+    prefetch: vi.fn(),
+    reload: vi.fn(),
+    beforePopState: vi.fn(),
+    events: {
+      on: vi.fn(),
+      off: vi.fn(),
+      emit: vi.fn(),
+    },
   }),
-  // Add mocks for other fonts you use
+  useSearchParams: vi.fn().mockReturnValue({
+    get: vi.fn(),
+    getAll: vi.fn(),
+    has: vi.fn(),
+    keys: vi.fn(),
+    entries: vi.fn(),
+    toString: vi.fn(),
+  }),
 }));

@@ -23,9 +23,7 @@ function LoginSocialSection() {
           sx={{ display: "flex" }}
           startIcon={<FontAwesomeIcon icon={faGoogle} />}
         >
-          <Typography variant="body2" fontWeight="bold">
-            Google
-          </Typography>
+          <Typography variant="body2">Google</Typography>
         </Button>
         <Button
           variant="outlined"
@@ -33,9 +31,7 @@ function LoginSocialSection() {
           sx={{ display: "flex" }}
           startIcon={<FontAwesomeIcon icon={faFacebook} />}
         >
-          <Typography variant="body2" fontWeight="bold">
-            Facebook
-          </Typography>
+          <Typography variant="body2">Facebook</Typography>
         </Button>
       </Box>
     </>

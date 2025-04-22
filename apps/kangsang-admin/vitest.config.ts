@@ -9,6 +9,10 @@ async function setupConfig() {
     test: {
       globals: true,
       environment: "jsdom",
+      coverage: {
+        enabled: true,
+        reporter: ["html"],
+      },
       setupFiles: "./src/utils/setupTest.tsx",
     },
   });

@@ -27,7 +27,7 @@ function LoginFormSection() {
     loginFormValidationSchema()
   );
 
-  const { handleSubmit, control, setValue } = useForm<LoginFormType>({
+  const { handleSubmit, control } = useForm<LoginFormType>({
     resolver,
   });
 
@@ -57,6 +57,7 @@ function LoginFormSection() {
         defaultValue=""
         render={({ field: { onChange, value }, fieldState: { error } }) => (
           <TextField
+            data-testid="email-input"
             placeholder="email"
             value={value}
             helperText={error?.message}
@@ -71,6 +72,7 @@ function LoginFormSection() {
         defaultValue=""
         render={({ field: { onChange, value }, fieldState: { error } }) => (
           <TextField
+            data-testid="password-input"
             placeholder="password"
             type={isHidePass ? "password" : "text"}
             helperText={error?.message}
@@ -86,6 +88,7 @@ function LoginFormSection() {
                 endAdornment: (
                   <InputAdornment position="start">
                     <IconButton
+                      data-testid="open-password-btn"
                       onClick={() => setIsHidePass((prev) => !prev)}
                       size="small"
                     >
@@ -114,6 +117,7 @@ function LoginFormSection() {
         </Typography>
       </Link> */}
       <Button
+        data-testid="signin-btn"
         type="submit"
         variant="contained"
         onClick={handleSubmit(onSubmitLogin)}
