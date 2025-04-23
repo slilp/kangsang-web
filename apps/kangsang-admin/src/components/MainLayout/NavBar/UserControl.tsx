@@ -30,12 +30,12 @@ function UserControl() {
     <>
       <Button
         onClick={onOpenPopover}
-        sx={{ color: "text.primary", width: { xs: "125px", md: "160px" } }}
+        sx={{ width: { xs: "125px", md: "160px" } }}
         startIcon={
           <FontAwesomeIcon icon={faUser} color={theme.palette.text.secondary} />
         }
       >
-        <Typography variant="body2" noWrap color="text.secondary">
+        <Typography variant="body2" noWrap color="textSecondary">
           {session?.user?.displayName ?? "-"}
         </Typography>{" "}
       </Button>

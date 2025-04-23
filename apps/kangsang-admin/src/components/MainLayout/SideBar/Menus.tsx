@@ -15,7 +15,7 @@ function Menus({ role, setExpandMobileMenu }: MenusProp) {
         navMenu.roles.length === 0 || navMenu.roles.includes(role) ? (
           <List key={`navMenu-${index}`} sx={{ p: 0, mb: 1, px: 1 }}>
             {navMenu.titleSection && (
-              <Typography variant="subtitle2" sx={{ px: 2 }}>
+              <Typography variant="body2" fontWeight="medium" sx={{ px: 2 }}>
                 {navMenu.titleSection}
               </Typography>
             )}

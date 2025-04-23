@@ -42,28 +42,28 @@ const dashboardSection: INavMenu = {
   ],
 };
 
-const productSection: INavMenu = {
-  id: "product",
-  titleSection: "Product",
+const categorySection: INavMenu = {
+  id: "category",
+  titleSection: "Categories",
   roles: [],
   mainMenus: [
     {
-      id: "product-menu-1",
-      title: "Product",
-      path: "/product",
+      id: "category-menu-1",
+      title: "Category",
+      path: "/category",
       icon: faBoxOpen,
       roles: [],
       subMenus: [
         {
-          id: "product-submenu-1",
-          title: "View Products",
-          path: "/product/view",
+          id: "category-submenu-1",
+          title: "View Categories",
+          path: "/category/view",
           roles: [],
         },
         {
           id: "product-submenu-2",
-          title: "Create Product",
-          path: "/product/create",
+          title: "Create Category",
+          path: "/category/create",
           roles: [],
         },
       ],
@@ -71,4 +71,4 @@ const productSection: INavMenu = {
   ],
 };
 
-export const navMenus: INavMenu[] = [dashboardSection, productSection];
+export const navMenus: INavMenu[] = [dashboardSection, categorySection];

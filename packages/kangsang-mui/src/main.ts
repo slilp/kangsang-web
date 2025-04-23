@@ -2,6 +2,7 @@
 export { Button as ButtonMui } from "./stories/Button";
 
 //component
+export { default as ContentBox } from "./stories/atom/ContentBox";
 
 //layout
 export { default as FullPage } from "./stories/layout/FullPage";

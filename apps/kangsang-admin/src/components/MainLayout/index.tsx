@@ -4,7 +4,7 @@ import React, { useMemo, useState } from "react";
 import { Box, Container, Toolbar } from "kangsang-mui";
 import NavBar from "./NavBar";
 import SideBar from "./SideBar";
-// import SideBar from "./SideBar";
+import Navigator from "./Navigator";
 
 interface MainLayoutProp {
   children: React.ReactNode;
@@ -38,6 +38,7 @@ function MainLayout({ children }: MainLayoutProp) {
       >
         <Container maxWidth="xl" sx={{ mt: 1 }}>
           <Toolbar />
+          <Navigator />
           {children}
         </Container>
       </Box>

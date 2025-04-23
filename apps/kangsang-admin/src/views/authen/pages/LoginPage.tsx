@@ -23,13 +23,7 @@ function LoginPage() {
           <LoginSocialSection />
           <Typography variant="body2">
             Don't have an account ?{" "}
-            <Link
-              href="/register"
-              style={{
-                textDecoration: "none",
-                color: "black",
-              }}
-            >
+            <Link href="/register">
               <Typography
                 variant="body2"
                 component="span"

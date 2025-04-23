@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode, useEffect } from "react";
-import { Prompt } from "next/font/google";
+import { Rubik } from "next/font/google";
 import {
   Alert,
   CssBaseline,
@@ -18,9 +18,9 @@ interface ThemeProviderProps {
   children: ReactNode;
 }
 
-const promptFont = Prompt({
-  subsets: ["latin", "thai"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+const rubiktFont = Rubik({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
 const AppThemeProvider = ({ children }: ThemeProviderProps) => {
@@ -38,7 +38,7 @@ const AppThemeProvider = ({ children }: ThemeProviderProps) => {
   return (
     <ThemeProvider
       theme={dynamicTheme(themeSelectorState, {
-        fontFamily: promptFont.style.fontFamily,
+        fontFamily: rubiktFont.style.fontFamily,
       })}
     >
       <CssBaseline />
