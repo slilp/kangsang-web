@@ -3,8 +3,8 @@ import { vi } from "vitest";
 
 vi.mock("next/font/google", () => ({
   __esModule: true,
-  Prompt: vi.fn().mockReturnValue({
-    className: "prompt-mock",
+  Rubik: vi.fn().mockReturnValue({
+    className: "rubil-mock",
     style: { fontFamily: "Prompt" },
   }),
 }));

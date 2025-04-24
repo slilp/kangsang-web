@@ -83,6 +83,7 @@ function SubMenus({ role, menu, setExpandMobileMenu }: SubMenusProps) {
                     key={`submenu-${subMenu.id}`}
                     display="flex"
                     alignItems="center"
+                    mt={0.5}
                   >
                     <Box width="16px" height="1px" bgcolor="text.disabled" />
                     <SubMenuButton

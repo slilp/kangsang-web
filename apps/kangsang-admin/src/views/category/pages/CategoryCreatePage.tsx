@@ -4,13 +4,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Resolver, useForm } from "react-hook-form";
 import { Box, Button, ContentBox, FullPage, Typography } from "kangsang-mui";
 
+//component
+import InputForm from "@/components/Form/InputForm";
+
 // util
 import {
   categoryFormFields,
   CategoryFormType,
   categoryFormValidationSchema,
 } from "../utils/categoryForm";
-import InputForm from "@/components/Form/InputForm";
 
 function CategoryCreatePage() {
   const resolver: Resolver<CategoryFormType> = yupResolver(
@@ -38,6 +40,7 @@ function CategoryCreatePage() {
             title={field.title}
             description={field.description}
             placeholder={field.placeholder}
+            options={field.options?.map((option) => option.label) || []}
             type={field.type}
           />
         ))}

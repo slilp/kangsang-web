@@ -1,4 +1,4 @@
-import { IFormField } from "@/types/form";
+import { IFormField, InputTypeEnum } from "@/types/form";
 import * as yup from "yup";
 
 export type CategoryFormType = {
@@ -17,21 +17,33 @@ export const categoryFormValidationSchema = () =>
 export const categoryFormFields: IFormField[] = [
   {
     id: "name",
-    type: "text",
+    type: InputTypeEnum.TEXT,
     title: "Name",
     description: "Name of the category",
     placeholder: "Enter category name",
   },
   {
     id: "description",
-    type: "text",
+    type: InputTypeEnum.TEXT,
     title: "Description",
     description: "Description of the category",
     placeholder: "Enter category description",
   },
   {
+    id: "tag",
+    type: InputTypeEnum.SELECTION,
+    title: "Tag",
+    description: "Description of the tag",
+    placeholder: "Enter category tag",
+    options: [
+      { id: "tag1", label: "Tag 1" },
+      { id: "tag2", label: "Tag 2" },
+      { id: "tag3", label: "Tag 3" },
+    ],
+  },
+  {
     id: "coverImage",
-    type: "text",
+    type: InputTypeEnum.IMAGE,
     title: "Cover Image",
     description: "Cover image of the category",
     placeholder: "Enter category cover image",

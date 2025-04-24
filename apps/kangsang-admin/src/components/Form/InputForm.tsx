@@ -1,6 +1,8 @@
-import { Box, TextField, Typography } from "kangsang-mui";
-import React from "react";
+import { Box, Typography } from "kangsang-mui";
 import { Controller } from "react-hook-form";
+
+import Input from "./Input";
+import { InputTypeEnum } from "@/types/form";
 
 interface InputFormProps {
   id: string;
@@ -8,7 +10,8 @@ interface InputFormProps {
   title?: string;
   description?: string;
   placeholder?: string;
-  type?: string;
+  options?: string[];
+  type: InputTypeEnum;
   value?: string;
 }
 
@@ -18,7 +21,8 @@ function InputForm({
   title,
   description,
   placeholder = "",
-  type = "text",
+  options = [],
+  type = InputTypeEnum.TEXT,
   value = "",
 }: InputFormProps) {
   return (
@@ -44,13 +48,14 @@ function InputForm({
         control={control}
         defaultValue={value}
         render={({ field: { onChange, value }, fieldState: { error } }) => (
-          <TextField
-            data-testid={`${id}-text-input`}
+          <Input
+            id={id}
+            type={type}
             placeholder={placeholder}
             value={value}
-            helperText={error?.message}
-            error={!!error?.message}
-            onChange={(e) => onChange(e.target.value.toLowerCase())}
+            options={options}
+            errorMsg={error?.message}
+            onChange={(newValue: string) => onChange(newValue)}
           />
         )}
       />
