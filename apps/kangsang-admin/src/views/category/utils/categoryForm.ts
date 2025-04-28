@@ -30,18 +30,6 @@ export const categoryFormFields: IFormField[] = [
     placeholder: "Enter category description",
   },
   {
-    id: "tag",
-    type: InputTypeEnum.SELECTION,
-    title: "Tag",
-    description: "Description of the tag",
-    placeholder: "Enter category tag",
-    options: [
-      { id: "tag1", label: "Tag 1" },
-      { id: "tag2", label: "Tag 2" },
-      { id: "tag3", label: "Tag 3" },
-    ],
-  },
-  {
     id: "coverImage",
     type: InputTypeEnum.IMAGE,
     title: "Cover Image",

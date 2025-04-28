@@ -1,29 +1,86 @@
 "use client";
 
+//main
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Resolver, useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { Box, Button, ContentBox, FullPage, Typography } from "kangsang-mui";
+import { useAppDispatch } from "@/redux/hook";
 
 //component
 import InputForm from "@/components/Form/InputForm";
-
-// util
 import {
   categoryFormFields,
   CategoryFormType,
   categoryFormValidationSchema,
 } from "../utils/categoryForm";
 
+//util
+import { openSnackbar } from "@/redux/snackbar";
+import { convertBase64ToFile } from "@/utils/imageConverter";
+
+//service
+import useMutateUploadImg from "@/hooks/useMutateUploadImg";
+import useMutateCreateCategory from "../hooks/useMutateCreateCategory";
+
 function CategoryCreatePage() {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
   const resolver: Resolver<CategoryFormType> = yupResolver(
     categoryFormValidationSchema()
   );
 
-  const { handleSubmit, control } = useForm<CategoryFormType>({
+  const { handleSubmit, control, getValues } = useForm<CategoryFormType>({
     resolver,
   });
 
-  const onSubmitForm = (data: CategoryFormType) => {};
+  const createCategoryMutate = useMutateCreateCategory({
+    onSuccess: () => {
+      dispatch(
+        openSnackbar({
+          open: true,
+          message: "You have successfully create new category",
+          severity: "success",
+        })
+      );
+      router.push("/category/view");
+    },
+    onError: () => {
+      dispatch(
+        openSnackbar({
+          open: true,
+          message: "Failed to create category, please try again",
+          severity: "error",
+        })
+      );
+    },
+  });
+
+  const uploadImgMutate = useMutateUploadImg({
+    onSuccess: ({ imageUrl }) => {
+      createCategoryMutate.mutate({
+        name: getValues("name"),
+        description: getValues("description"),
+        coverImage: imageUrl,
+      });
+    },
+    onError: () => {
+      dispatch(
+        openSnackbar({
+          open: true,
+          message: "Failed to create category, please try again",
+          severity: "error",
+        })
+      );
+    },
+  });
+
+  const onSubmitForm = (data: CategoryFormType) => {
+    uploadImgMutate.mutate({
+      folderName: "category",
+      file: convertBase64ToFile(data.coverImage, "coverImage"),
+    });
+  };
 
   return (
     <FullPage component="form">
@@ -51,7 +108,11 @@ function CategoryCreatePage() {
         mt={2}
         onClick={handleSubmit(onSubmitForm)}
       >
-        <Button type="button" variant="contained">
+        <Button
+          type="button"
+          variant="contained"
+          disabled={uploadImgMutate.isPending || createCategoryMutate.isPending}
+        >
           Submit
         </Button>
       </Box>

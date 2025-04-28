@@ -3,7 +3,7 @@ import authOptions from "@/utils/authOptions";
 import axios, { AxiosInstance } from "axios";
 import { getServerSession } from "next-auth";
 
-const apiInstanceInternal = async (
+const apiInstanceSecure = async (
   contentType = "application/json"
 ): Promise<AxiosInstance> => {
   const session = await getServerSession(authOptions);
@@ -17,4 +17,4 @@ const apiInstanceInternal = async (
   });
 };
 
-export default apiInstanceInternal;
+export default apiInstanceSecure;

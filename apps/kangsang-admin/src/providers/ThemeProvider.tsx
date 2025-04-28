@@ -48,7 +48,7 @@ const AppThemeProvider = ({ children }: ThemeProviderProps) => {
         onClose={(event, reason) => {
           dispatch(closeSnackbar());
         }}
-        autoHideDuration={1500}
+        autoHideDuration={3000}
         anchorOrigin={{
           vertical: "top",
           horizontal: "center",

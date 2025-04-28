@@ -7,13 +7,12 @@ import {
   faCloudArrowUp,
   faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import { useAppSelector } from "@/redux/hook";
 
 interface UploadInputProps {
   id: string;
   onChange: (newValue: string) => void;
-  placeholder?: string;
   type: string;
+  placeholder?: string;
   value?: string;
   errorMsg?: string;
 }
@@ -26,8 +25,6 @@ function UploadInput({
   value,
   errorMsg,
 }: UploadInputProps) {
-  const themeMode = useAppSelector((state) => state.themeMode);
-
   const [preview, setPreview] = useState<string | null>(value || null);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -54,7 +51,7 @@ function UploadInput({
   };
 
   return (
-    <Box display="flex" flexDirection="column" gap={2}>
+    <Box>
       {preview ? (
         <Box position="relative" width="fit-content" mx="auto">
           <IconButton
@@ -84,15 +81,25 @@ function UploadInput({
             borderRadius={2}
             bgcolor="transparent"
             border={1}
-            borderColor={colors.grey[themeMode.theme === "dark" ? 700 : 400]}
             height={200}
-            sx={{
-              cursor: "pointer",
-              "&:hover": {
-                borderColor:
-                  colors.grey[themeMode.theme === "dark" ? 400 : 600],
-              },
-            }}
+            sx={[
+              (theme) => ({
+                cursor: "pointer",
+                borderColor: !!errorMsg ? colors.red[400] : colors.grey[400],
+                "&:hover": {
+                  borderColor: !!errorMsg ? colors.red[400] : colors.grey[600],
+                },
+              }),
+              (theme) =>
+                theme.applyStyles("dark", {
+                  borderColor: !!errorMsg ? colors.red[600] : colors.grey[700],
+                  "&:hover": {
+                    borderColor: !!errorMsg
+                      ? colors.red[600]
+                      : colors.grey[400],
+                  },
+                }),
+            ]}
             onClick={handleBoxClick}
           >
             <Center display="flex" flexDirection="column" gap={3}>
@@ -100,7 +107,7 @@ function UploadInput({
                 icon={faCloudArrowUp}
                 size="2x"
                 style={{
-                  color: colors.grey[themeMode.theme === "dark" ? 700 : 500],
+                  color: colors.grey[500],
                 }}
               />
               <Typography variant="body1" color="text.secondary">
@@ -120,7 +127,11 @@ function UploadInput({
         </>
       )}
 
-      {errorMsg && <Typography color="error">{errorMsg}</Typography>}
+      {errorMsg && (
+        <Typography color="error" variant="caption">
+          {errorMsg}
+        </Typography>
+      )}
     </Box>
   );
 }

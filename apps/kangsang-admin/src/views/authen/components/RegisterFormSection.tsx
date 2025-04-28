@@ -41,8 +41,7 @@ function RegisterFormSection() {
       dispatch(
         openSnackbar({
           open: true,
-          title: "Welcome our new member !",
-          message: "You have successfully registered",
+          message: "Welcome our new member ! You have successfully registered",
           severity: "success",
         })
       );
@@ -51,8 +50,7 @@ function RegisterFormSection() {
       dispatch(
         openSnackbar({
           open: true,
-          title: "Failed to register",
-          message: "Please try again",
+          message: "Failed to register, please try again",
           severity: "error",
         })
       );

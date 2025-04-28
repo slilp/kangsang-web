@@ -1,16 +1,16 @@
-import apiInstanceInternal from "@/services/apiInstanceInternal";
+import apiInstancePublic from "@/services/apiInstancePublic";
 import { NextRequest, NextResponse } from "next/server";
 
 const getPathAndQuery = (req: NextRequest) => {
   const url = new URL(req.url);
-  const path = url.pathname.replace("/api/public", "");
+  const path = url.pathname.replace("/api", "");
   const query = Object.fromEntries(url.searchParams.entries());
   return { path, query };
 };
 
 export async function GET(req: NextRequest) {
   const { path, query } = getPathAndQuery(req);
-  const apiInstance = await apiInstanceInternal();
+  const apiInstance = await apiInstancePublic();
 
   try {
     const response = await apiInstance.get(path, { params: query });
@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   const { path } = getPathAndQuery(req);
   const body = await req.json();
-  const apiInstance = await apiInstanceInternal();
+  const apiInstance = await apiInstancePublic();
 
   try {
     const response = await apiInstance.post(path, body);
@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
 export async function PUT(req: NextRequest) {
   const { path } = getPathAndQuery(req);
   const body = await req.json();
-  const apiInstance = await apiInstanceInternal();
+  const apiInstance = await apiInstancePublic();
 
   try {
     const response = await apiInstance.put(path, body);
@@ -49,7 +49,7 @@ export async function PUT(req: NextRequest) {
 export async function PATCH(req: NextRequest) {
   const { path } = getPathAndQuery(req);
   const body = await req.json();
-  const apiInstance = await apiInstanceInternal();
+  const apiInstance = await apiInstancePublic();
 
   try {
     const response = await apiInstance.patch(path, body);
@@ -61,7 +61,7 @@ export async function PATCH(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   const { path } = getPathAndQuery(req);
-  const apiInstance = await apiInstanceInternal();
+  const apiInstance = await apiInstancePublic();
 
   try {
     const response = await apiInstance.delete(path);

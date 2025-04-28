@@ -1,16 +1,16 @@
-import apiInstanceInternal from "@/services/apiInstanceInternal";
+import apiInstanceSecure from "@/services/apiInstanceSecure";
 import { NextRequest, NextResponse } from "next/server";
 
 const getPathAndQuery = (req: NextRequest) => {
   const url = new URL(req.url);
-  const path = url.pathname.replace("/api/secure", "");
+  const path = url.pathname.replace("/api", "");
   const query = Object.fromEntries(url.searchParams.entries());
   return { path, query };
 };
 
 export async function GET(req: NextRequest) {
   const { path, query } = getPathAndQuery(req);
-  const apiInstance = await apiInstanceInternal();
+  const apiInstance = await apiInstanceSecure();
 
   try {
     const response = await apiInstance.get(path, { params: query });
@@ -22,8 +22,17 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   const { path } = getPathAndQuery(req);
-  const body = await req.json();
-  const apiInstance = await apiInstanceInternal();
+  const contentType = req.headers.get("Content-Type");
+  let body: any;
+  if ((contentType || "application/json").startsWith("multipart/form-data")) {
+    body = await req.formData();
+  } else if (contentType === "application/json") {
+    body = await req.json();
+  }
+
+  const apiInstance = await apiInstanceSecure(
+    contentType || "application/json"
+  );
 
   try {
     const response = await apiInstance.post(path, body);
@@ -36,7 +45,7 @@ export async function POST(req: NextRequest) {
 export async function PUT(req: NextRequest) {
   const { path } = getPathAndQuery(req);
   const body = await req.json();
-  const apiInstance = await apiInstanceInternal();
+  const apiInstance = await apiInstanceSecure();
 
   try {
     const response = await apiInstance.put(path, body);
@@ -49,7 +58,7 @@ export async function PUT(req: NextRequest) {
 export async function PATCH(req: NextRequest) {
   const { path } = getPathAndQuery(req);
   const body = await req.json();
-  const apiInstance = await apiInstanceInternal();
+  const apiInstance = await apiInstanceSecure();
 
   try {
     const response = await apiInstance.patch(path, body);
@@ -61,7 +70,7 @@ export async function PATCH(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   const { path } = getPathAndQuery(req);
-  const apiInstance = await apiInstanceInternal();
+  const apiInstance = await apiInstanceSecure();
 
   try {
     const response = await apiInstance.delete(path);

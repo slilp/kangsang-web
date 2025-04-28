@@ -75,7 +75,6 @@ const authOptions: NextAuthOptions = {
       if (!isExpired) {
         return { ...token, ...user };
       }
-
       return refreshAccessToken({ ...token, ...user });
     },
     async session({ session, token }: { session: any; token: any }) {
@@ -85,6 +84,7 @@ const authOptions: NextAuthOptions = {
           id: token.id,
           email: token.email,
           displayName: token.displayName,
+          accessToken: token.accessToken,
         },
         error: token?.error,
       };

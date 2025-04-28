@@ -1,3 +1,4 @@
 export const service = {
-  public: "/api/public/public",
+  public: "/api/public",
+  secure: "/api/secure",
 };

@@ -15,13 +15,17 @@ import {
 } from "kangsang-mui";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
+import { useAppDispatch } from "@/redux/hook";
 
 // util
 import { LoginFormType, loginFormValidationSchema } from "../utils/loginForm";
+import { openSnackbar } from "@/redux/snackbar";
 
 function LoginFormSection() {
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const [isHidePass, setIsHidePass] = useState(true);
+  const [isSinging, setIsSiging] = useState(false);
 
   const resolver: Resolver<LoginFormType> = yupResolver(
     loginFormValidationSchema()
@@ -32,6 +36,7 @@ function LoginFormSection() {
   });
 
   const onSubmitLogin = (data: LoginFormType) => {
+    setIsSiging(true);
     signIn("credentials", {
       email: data.email,
       password: data.password,
@@ -40,7 +45,14 @@ function LoginFormSection() {
       if (res?.ok) {
         router.push("/");
       } else {
-        // setError(true);
+        dispatch(
+          openSnackbar({
+            open: true,
+            message: "Invalid email or password",
+            severity: "error",
+          })
+        );
+        setIsSiging(false);
       }
     });
   };
@@ -121,6 +133,7 @@ function LoginFormSection() {
         type="submit"
         variant="contained"
         onClick={handleSubmit(onSubmitLogin)}
+        disabled={isSinging}
       >
         <Typography variant="body1">Sign in</Typography>
       </Button>
