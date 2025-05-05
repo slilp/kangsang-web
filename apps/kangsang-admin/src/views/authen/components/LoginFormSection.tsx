@@ -8,6 +8,7 @@ import { Controller, Resolver, useForm } from "react-hook-form";
 import {
   Box,
   Button,
+  CircularProgress,
   IconButton,
   InputAdornment,
   TextField,
@@ -135,7 +136,9 @@ function LoginFormSection() {
         onClick={handleSubmit(onSubmitLogin)}
         disabled={isSinging}
       >
-        <Typography variant="body1">Sign in</Typography>
+        <Typography variant="body1">
+          {isSinging ? <CircularProgress size="20px" /> : "Sign in"}
+        </Typography>
       </Button>
     </Box>
   );

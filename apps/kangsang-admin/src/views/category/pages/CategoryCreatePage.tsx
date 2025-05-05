@@ -4,7 +4,14 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Resolver, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { Box, Button, ContentBox, FullPage, Typography } from "kangsang-mui";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  ContentBox,
+  FullPage,
+  Typography,
+} from "kangsang-mui";
 import { useAppDispatch } from "@/redux/hook";
 
 //component
@@ -82,13 +89,15 @@ function CategoryCreatePage() {
     });
   };
 
+  const isLoading = uploadImgMutate.isPending || createCategoryMutate.isPending;
+
   return (
     <FullPage component="form">
       <Typography variant="h6">Create New Category</Typography>
       <Typography variant="body2" color="text.secondary">
         This is the page where you can create a new category.
       </Typography>
-      <ContentBox display="flex" flexDirection="column" gap={2} sx={{ mt: 2 }}>
+      <ContentBox display="flex" flexDirection="column" gap={2} p={2} mt={2}>
         {categoryFormFields.map((field) => (
           <InputForm
             key={field.id}
@@ -111,9 +120,10 @@ function CategoryCreatePage() {
         <Button
           type="button"
           variant="contained"
-          disabled={uploadImgMutate.isPending || createCategoryMutate.isPending}
+          disabled={isLoading}
+          sx={{ minWidth: "100px" }}
         >
-          Submit
+          {isLoading ? <CircularProgress size="20px" /> : "Submit"}
         </Button>
       </Box>
     </FullPage>

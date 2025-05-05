@@ -13,7 +13,7 @@ export const DARK_PALETTE = {
     light: "#1c252e",
   },
   background: {
-    default: "#141A21",
+    default: "#121212",
     paper: "#1c252e",
   },
 };

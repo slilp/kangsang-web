@@ -10,6 +10,7 @@ import {
   TextField,
   Typography,
   Box,
+  CircularProgress,
 } from "kangsang-mui";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
@@ -27,6 +28,7 @@ function RegisterFormSection() {
   const dispatch = useAppDispatch();
   const [isHidePass, setIsHidePass] = useState(true);
   const [isHideConfirmPass, setIsHideConfirmPass] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const resolver: Resolver<RegisterFormType> = yupResolver(
     registerFormValidationSchema()
@@ -163,8 +165,11 @@ function RegisterFormSection() {
         type="submit"
         variant="contained"
         onClick={handleSubmit(onSubmitRegister)}
+        disabled={isLoading}
       >
-        <Typography variant="body1">Reay to new user!</Typography>
+        <Typography variant="body1">
+          {isLoading ? <CircularProgress size="20px" /> : "Reay to new user!"}
+        </Typography>
       </Button>
     </Box>
   );

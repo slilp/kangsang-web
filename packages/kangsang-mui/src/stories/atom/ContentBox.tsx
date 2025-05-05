@@ -7,13 +7,7 @@ interface ContentBoxProps extends BoxProps {
 
 function ContentBox({ children, ...props }: ContentBoxProps) {
   return (
-    <Box
-      p={2}
-      boxShadow={1}
-      borderRadius={2}
-      bgcolor="background.paper"
-      {...props}
-    >
+    <Box boxShadow={1} borderRadius={2} bgcolor="background.paper" {...props}>
       {children}
     </Box>
   );
