@@ -23,7 +23,6 @@ const useFetchListCategory = ({
       const resp = await categoryApi.listCategory(page + 1, limit, orderBy);
       return resp;
     },
-    ...(search ? {} : { staleTime: 1000 * 10 }), // 10 seconds
   });
 };
 

@@ -30,7 +30,16 @@ import { convertBase64ToFile } from "@/utils/imageConverter";
 import useMutateUploadImg from "@/hooks/useMutateUploadImg";
 import useMutateCreateCategory from "../hooks/useMutateCreateCategory";
 
-function CategoryCreatePage() {
+interface CategoryCreatePageProps {
+  initialData?: {
+    id: string;
+    name: string;
+    description: string;
+    coverImage: string;
+  };
+}
+
+function CategoryCreatePage({ initialData }: CategoryCreatePageProps) {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const resolver: Resolver<CategoryFormType> = yupResolver(
@@ -39,6 +48,11 @@ function CategoryCreatePage() {
 
   const { handleSubmit, control, getValues } = useForm<CategoryFormType>({
     resolver,
+    defaultValues: {
+      name: initialData?.name || "",
+      description: initialData?.description || "",
+      coverImage: initialData?.coverImage || "",
+    },
   });
 
   const createCategoryMutate = useMutateCreateCategory({
@@ -93,9 +107,12 @@ function CategoryCreatePage() {
 
   return (
     <FullPage component="form">
-      <Typography variant="h6">Create New Category</Typography>
+      <Typography variant="h6">
+        {!!initialData ? "Edit" : "Create New"} Category
+      </Typography>
       <Typography variant="body2" color="text.secondary">
-        This is the page where you can create a new category.
+        This is the page where you can {!!initialData ? "edit" : "create"} a
+        category.
       </Typography>
       <ContentBox display="flex" flexDirection="column" gap={2} p={2} mt={2}>
         {categoryFormFields.map((field) => (

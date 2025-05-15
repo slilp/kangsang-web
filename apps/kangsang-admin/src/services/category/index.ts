@@ -1,10 +1,23 @@
 import axios from "axios";
 import { service } from "../servicePath";
-import { CreateCategoryRequest, ListCategoryResponse } from "./types";
+import {
+  CreateCategoryRequest,
+  EditCategoryRequest,
+  ICategoryInfo,
+  ListCategoryResponse,
+} from "./types";
+import apiInstanceSecure from "../apiInstanceSecure";
 
 const createCategory = async (requestBody: CreateCategoryRequest) => {
-  const resp = await axios.post(`${service.secure}/category`, requestBody);
-  return;
+  await axios.post(`${service.secure}/category`, requestBody);
+};
+
+const editCategory = async (requestBody: EditCategoryRequest) => {
+  await axios.post(`${service.secure}/category`, requestBody);
+};
+
+const deleteCategory = async ({ categoryId }: { categoryId: string }) => {
+  await axios.delete(`${service.secure}/category/${categoryId}`);
 };
 
 const listCategory = async (page: number, limit: number, orderBy: string) => {
@@ -14,9 +27,21 @@ const listCategory = async (page: number, limit: number, orderBy: string) => {
   return resp.data;
 };
 
+const getById = async (categoryId: string) => {
+  const apiInstance = await apiInstanceSecure();
+
+  const resp = await apiInstance.get<ICategoryInfo>(
+    `/secure/category/${categoryId}`
+  );
+  return resp.data;
+};
+
 const categoryApi = {
+  getById,
   listCategory,
+  editCategory,
   createCategory,
+  deleteCategory,
 };
 
 export default categoryApi;

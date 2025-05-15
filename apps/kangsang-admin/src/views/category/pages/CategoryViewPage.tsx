@@ -1,20 +1,21 @@
 "use client";
 
 //main
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   Box,
   ContentBox,
   FullPage,
   IconButton,
+  KangsangModal,
   Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TablePagination,
   TableRow,
-  TableSortLabel,
   Typography,
 } from "kangsang-mui";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -37,8 +38,11 @@ import {
 import useFetchListCategory from "../hooks/useQueryListCategory";
 import TableHeader from "@/components/Table/TableHeader";
 import TableSkeleton from "@/components/Table/TableSkeleton";
+import useMutateDeleteCategory from "../hooks/useMutateDeleteCategory";
 
 function CategoryViewPage() {
+  const router = useRouter();
+  const [delSelected, setDelSelected] = useState<string>("");
   const resolver: Resolver<SearchCategoryFormType> = yupResolver(
     searchCategoryFormValidationSchema()
   );
@@ -55,7 +59,11 @@ function CategoryViewPage() {
 
   const formValue = watch();
 
-  const { data: categoriesData, isLoading } = useFetchListCategory({
+  const {
+    data: categoriesData,
+    refetch,
+    isLoading,
+  } = useFetchListCategory({
     page: formValue.page,
     limit: formValue.limit,
     orderBy: `${formValue.orderBy}:${formValue.order}`,
@@ -69,6 +77,12 @@ function CategoryViewPage() {
     setValue("orderBy", colId);
     setValue("order", isDesc ? "asc" : "desc");
   };
+
+  const deleteCategoryMutate = useMutateDeleteCategory({
+    onSuccess: () => {
+      refetch();
+    },
+  });
 
   return (
     <FullPage component="form">
@@ -137,7 +151,9 @@ function CategoryViewPage() {
                                   background: "transparent",
                                 },
                               }}
-                              onClick={() => {}}
+                              onClick={() => {
+                                router.push(`/category/edit/${row.id}`);
+                              }}
                             >
                               <FontAwesomeIcon
                                 icon={faPenToSquare}
@@ -152,7 +168,9 @@ function CategoryViewPage() {
                                   background: "transparent",
                                 },
                               }}
-                              onClick={() => {}}
+                              onClick={() => {
+                                setDelSelected(row.id + "");
+                              }}
                             >
                               <FontAwesomeIcon icon={faTrash} scale="xs" />
                             </IconButton>
@@ -176,6 +194,18 @@ function CategoryViewPage() {
         </Paper>
       </ContentBox>
       <Box height={50} />
+      <KangsangModal
+        open={!!delSelected}
+        handleClose={() => setDelSelected("")}
+        title={`Delete Category : ${delSelected}`}
+        description="Are you sure you want to delete this category?"
+        handleConfirm={() => {
+          deleteCategoryMutate.mutate({ categoryId: delSelected });
+          setDelSelected("");
+        }}
+        txtBtnConfirm="Delete"
+        txtBtnCancel="Cancel"
+      />
     </FullPage>
   );
 }

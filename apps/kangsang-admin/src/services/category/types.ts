@@ -4,6 +4,10 @@ export interface CreateCategoryRequest {
   coverImage: string;
 }
 
+export interface EditCategoryRequest extends CreateCategoryRequest {
+  id: string;
+}
+
 export interface ICategoryInfo {
   id: number;
   name: string;
