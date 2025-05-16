@@ -13,7 +13,7 @@ const createCategory = async (requestBody: CreateCategoryRequest) => {
 };
 
 const editCategory = async (requestBody: EditCategoryRequest) => {
-  await axios.post(`${service.secure}/category`, requestBody);
+  await axios.put(`${service.secure}/category/${requestBody.id}`, requestBody);
 };
 
 const deleteCategory = async ({ categoryId }: { categoryId: string }) => {

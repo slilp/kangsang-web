@@ -12,7 +12,6 @@ import {
   FullPage,
   Typography,
 } from "kangsang-mui";
-import { useAppDispatch } from "@/redux/hook";
 
 //component
 import InputForm from "@/components/Form/InputForm";
@@ -23,12 +22,13 @@ import {
 } from "../utils/categoryForm";
 
 //util
-import { openSnackbar } from "@/redux/snackbar";
 import { convertBase64ToFile } from "@/utils/imageConverter";
+import { extractCategoryPath } from "../utils/categoryPath";
 
 //service
 import useMutateUploadImg from "@/hooks/useMutateUploadImg";
 import useMutateCreateCategory from "../hooks/useMutateCreateCategory";
+import useMutateEditCategory from "../hooks/useMutateEditCategory";
 
 interface CategoryCreatePageProps {
   initialData?: {
@@ -41,7 +41,6 @@ interface CategoryCreatePageProps {
 
 function CategoryCreatePage({ initialData }: CategoryCreatePageProps) {
   const router = useRouter();
-  const dispatch = useAppDispatch();
   const resolver: Resolver<CategoryFormType> = yupResolver(
     categoryFormValidationSchema()
   );
@@ -57,50 +56,49 @@ function CategoryCreatePage({ initialData }: CategoryCreatePageProps) {
 
   const createCategoryMutate = useMutateCreateCategory({
     onSuccess: () => {
-      dispatch(
-        openSnackbar({
-          open: true,
-          message: "You have successfully create new category",
-          severity: "success",
-        })
-      );
       router.push("/category/view");
     },
-    onError: () => {
-      dispatch(
-        openSnackbar({
-          open: true,
-          message: "Failed to create category, please try again",
-          severity: "error",
-        })
-      );
+  });
+
+  const editCategoryMutate = useMutateEditCategory({
+    onSuccess: () => {
+      router.push("/category/view");
     },
   });
 
   const uploadImgMutate = useMutateUploadImg({
     onSuccess: ({ imageUrl }) => {
-      createCategoryMutate.mutate({
-        name: getValues("name"),
-        description: getValues("description"),
-        coverImage: imageUrl,
-      });
-    },
-    onError: () => {
-      dispatch(
-        openSnackbar({
-          open: true,
-          message: "Failed to create category, please try again",
-          severity: "error",
-        })
-      );
+      if (!!initialData) {
+        editCategoryMutate.mutate({
+          id: initialData.id,
+          name: getValues("name"),
+          description: getValues("description"),
+          coverImage: imageUrl,
+        });
+      } else {
+        createCategoryMutate.mutate({
+          name: getValues("name"),
+          description: getValues("description"),
+          coverImage: imageUrl,
+        });
+      }
     },
   });
 
   const onSubmitForm = (data: CategoryFormType) => {
-    uploadImgMutate.mutate({
-      folderName: "category",
-      file: convertBase64ToFile(data.coverImage, "coverImage"),
-    });
+    if (data.coverImage.startsWith("http")) {
+      editCategoryMutate.mutate({
+        id: initialData?.id || "",
+        name: data.name,
+        description: data.description,
+        coverImage: extractCategoryPath(data.coverImage) || "",
+      });
+    } else {
+      uploadImgMutate.mutate({
+        folderName: "category",
+        file: convertBase64ToFile(data.coverImage, "coverImage"),
+      });
+    }
   };
 
   const isLoading = uploadImgMutate.isPending || createCategoryMutate.isPending;

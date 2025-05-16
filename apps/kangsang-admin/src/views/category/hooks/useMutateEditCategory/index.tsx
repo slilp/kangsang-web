@@ -11,7 +11,7 @@ const useMutateEditCategory = ({ onSuccess }: UseMutateEditCategoryProps) => {
   const dispatch = useAppDispatch();
 
   return useMutation({
-    mutationFn: categoryApi.createCategory,
+    mutationFn: categoryApi.editCategory,
     onSuccess: () => {
       onSuccess();
       dispatch(
