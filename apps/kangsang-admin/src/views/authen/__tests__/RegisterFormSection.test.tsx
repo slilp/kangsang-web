@@ -131,7 +131,9 @@ describe("RegisterFormSection", () => {
         displayName: "test",
       });
       expect(
-        screen.getByText("You have successfully registered")
+        screen.getByText(
+          "Welcome our new member ! You have successfully registered"
+        )
       ).toBeInTheDocument();
     });
   });
@@ -168,6 +170,8 @@ describe("RegisterFormSection", () => {
         displayName: "test",
       });
     });
-    expect(screen.getByText("Please try again")).toBeInTheDocument();
+    expect(
+      screen.getByText("Failed to register, please try again")
+    ).toBeInTheDocument();
   });
 });
