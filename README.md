@@ -1,84 +1,118 @@
-# Turborepo starter
+# Kangsang Web
 
-This Turborepo starter is maintained by the Turborepo core team.
+A comprehensive collection of web development resources, tools, and best practices that I've discovered and implemented throughout my journey in web development. This repository serves as both a knowledge base and a practical implementation of modern web development concepts, patterns, and solutions.
 
-## Using this example
+## 📚 What You'll Find Here
 
-Run the following command:
+- **Code Examples**: Practical examples of complex web development concepts (\*\* Admin Dashboard project)
+- **Development Patterns**: Proven architectural patterns and coding practices
+- **Tool Configurations**: Optimized setups for various development tools
 
-```sh
-npx create-turbo@latest
+# 1) Kangsang Admin Dashboard
+
+A modern, developer-friendly admin dashboard boilerplate built with React, TypeScript, and Turborepo. This project provides a solid foundation for building scalable admin applications with best practices and modern tooling.
+
+## 📝 Project Description
+
+Kangsang Admin Dashboard is a comprehensive admin panel template designed to accelerate the development of modern web applications. Built with a focus on developer experience and maintainability, it offers:
+
+- **Monorepo Architecture**: Using Turborepo for efficient code sharing and management across multiple applications
+- **Modern Tech Stack**: Leveraging React, TypeScript, and Material-UI for a robust and type-safe development experience
+- **Developer-First Approach**: Clean code structure and comprehensive documentation for easy onboarding
+- **Production-Ready Features**: Built-in authentication, state management, and CRUD operations
+- **Customizable Design**: Flexible theming system with Material-UI integration
+
+This boilerplate is perfect for:
+
+- Building new admin panels from scratch
+- Learning modern React development practices
+- Creating scalable enterprise applications
+- Teams looking for a standardized admin dashboard solution
+
+## 🚀 Features
+
+### Completed Features ✅
+
+- Junior-friendly code structure
+- Authentication system
+- Unit testing setup
+- Query state management
+- Global state management
+- CRUD operations integration
+- Turborepo monorepo setup
+- Theme customization
+- Responsive layout design
+
+### In Progress Features 🚧
+
+- Social login integration
+- Multi-language support
+- Statistics and graphs
+- Animations
+- Storybook documentation
+
+## 🛠️ Tech Stack
+
+- Next.js (App Router)
+- TypeScript
+- Turborepo
+- Material-UI (Customized as Kangsang-MUI)
+- NextAuth.js
+- TanStak Query
+- Redux
+- Vitest (unit test)
+
+## 📦 Prerequisites
+
+- Node.js (v16 or higher)
+- pnpm (v8 or higher)
+- Git
+
+## 🚀 Getting Started
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/slilp/kangsang-web.git
+cd kangsang-web
 ```
 
-## What's inside?
+2. Install dependencies:
 
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
+```bash
+pnpm install
 ```
 
-### Develop
+3. Start the development server:
 
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
+```bash
 pnpm dev
 ```
 
-### Remote Caching
+4. Open your browser and navigate to `http://localhost:3000`
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+## 📁 Project Structure
 
 ```
-cd my-turborepo
-npx turbo login
+kangsang-web/
+├── apps/
+│   ├── kangsang-admin/     # Admin dashboard
+├── packages/    # Shared packages
+│   ├── kangsang-mui/  # Share components
+└── package.json
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+## 🔧 Available Scripts
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+- `pnpm dev` - Start development server
+- `pnpm build` - Build for production
+- `pnpm test` - Run tests
+- `pnpm lint` - Run linting
 
-```
-npx turbo link
-```
+## 🤝 Contributing
 
-## Useful Links
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-Learn more about the power of Turborepo:
+## 📝 License
 
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+This project is licensed under the MIT License - see the LICENSE file for details.

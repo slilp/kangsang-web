@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 import MainLayout from "@/components/MainLayout";
 import { setThemeStorage } from "@/utils/storage";
-import LoadingLayout from "@/components/LoadingLayout";
+import LoadingLayout from "@/components/MainLayout/LoadingLayout";
 
 interface UserAuthProviderProps {
   children: ReactNode;
