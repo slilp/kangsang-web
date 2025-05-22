@@ -12,6 +12,7 @@ import {
   Box,
   CircularProgress,
 } from "kangsang-mui";
+import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
 
@@ -25,6 +26,7 @@ import { useAppDispatch } from "@/redux/hook";
 import { openSnackbar } from "@/redux/snackbar";
 
 function RegisterFormSection() {
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const [isHidePass, setIsHidePass] = useState(true);
   const [isHideConfirmPass, setIsHideConfirmPass] = useState(true);
@@ -40,6 +42,7 @@ function RegisterFormSection() {
 
   const registerMutate = useMutateRegister({
     onSuccess: () => {
+      setIsLoading(false);
       dispatch(
         openSnackbar({
           open: true,
@@ -47,8 +50,10 @@ function RegisterFormSection() {
           severity: "success",
         })
       );
+      router.push("/login");
     },
     onError: () => {
+      setIsLoading(false);
       dispatch(
         openSnackbar({
           open: true,
@@ -60,6 +65,7 @@ function RegisterFormSection() {
   });
 
   const onSubmitRegister = (data: RegisterFormType) => {
+    setIsLoading(true);
     registerMutate.mutate({
       email: data.email,
       password: data.password,
