@@ -1,33 +1,6 @@
-# Kangsang Web
+# Kangsang Admin Dashboard
 
-A comprehensive collection of web development resources, tools, and best practices that I've discovered and implemented throughout my journey in web development. This repository serves as both a knowledge base and a practical implementation of modern web development concepts, patterns, and solutions.
-
-## 📚 What You'll Find Here
-
-- **Code Examples**: Practical examples of complex web development concepts (\*\* Admin Dashboard project)
-- **Development Patterns**: Proven architectural patterns and coding practices
-- **Tool Configurations**: Optimized setups for various development tools
-
-# 1) Kangsang Admin Dashboard
-
-A modern, developer-friendly admin dashboard boilerplate built with React, TypeScript, and Turborepo. This project provides a solid foundation for building scalable admin applications with best practices and modern tooling.
-
-## 📝 Project Description
-
-Kangsang Admin Dashboard is a comprehensive admin panel template designed to accelerate the development of modern web applications. Built with a focus on developer experience and maintainability, it offers:
-
-- **Monorepo Architecture**: Using Turborepo for efficient code sharing and management across multiple applications
-- **Modern Tech Stack**: Leveraging React, TypeScript, and Material-UI for a robust and type-safe development experience
-- **Developer-First Approach**: Clean code structure and comprehensive documentation for easy onboarding
-- **Production-Ready Features**: Built-in authentication, state management, and CRUD operations
-- **Customizable Design**: Flexible theming system with Material-UI integration
-
-This boilerplate is perfect for:
-
-- Building new admin panels from scratch
-- Learning modern React development practices
-- Creating scalable enterprise applications
-- Teams looking for a standardized admin dashboard solution
+A modern, developer-friendly admin dashboard boilerplate built with Next.js, TypeScript, and Turborepo. This project provides a solid foundation for building scalable admin applications with best practices and modern tooling.
 
 ## 🚀 Features
 
