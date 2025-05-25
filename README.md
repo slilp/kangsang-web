@@ -1,28 +1,14 @@
-# Kangsang Admin Dashboard
+# Kangsang Web
 
-A modern, developer-friendly admin dashboard boilerplate built with Next.js, TypeScript, and Turborepo. This project provides a solid foundation for building scalable admin applications with best practices and modern tooling.
+A modern, developer-friendly boilerplate built with Next.js, TypeScript, and Turborepo. This project provides a solid foundation for building scalable with best practices and modern tooling.
 
-## 🚀 Features
+## 🚀 Example project (Admin Dashboard)
 
-### Completed Features ✅
+![Admin Dashboard Preview](./apps/kangsang-admin/public/preview.png)
 
-- Junior-friendly code structure
-- Authentication system
-- Unit testing setup
-- Query state management
-- Global state management
-- CRUD operations integration
-- Turborepo monorepo setup
-- Theme customization
-- Responsive layout design
+## 🔗 Demo
 
-### In Progress Features 🚧
-
-- Social login integration
-- Multi-language support
-- Statistics and graphs
-- Animations
-- Storybook documentation
+Check out the live demo: [Kangsang Web Demo](https://kangsang-admin-web.vercel.app)
 
 ## 🛠️ Tech Stack
 
@@ -34,12 +20,6 @@ A modern, developer-friendly admin dashboard boilerplate built with Next.js, Typ
 - TanStak Query
 - Redux
 - Vitest (unit test)
-
-## 📦 Prerequisites
-
-- Node.js (v16 or higher)
-- pnpm (v8 or higher)
-- Git
 
 ## 🚀 Getting Started
 
