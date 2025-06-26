@@ -1,4 +1,5 @@
 import apiInstanceSecure from "@/services/apiInstanceSecure";
+import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
 const getPathAndQuery = (req: NextRequest) => {
@@ -10,7 +11,7 @@ const getPathAndQuery = (req: NextRequest) => {
 
 export async function GET(req: NextRequest) {
   const { path, query } = getPathAndQuery(req);
-  const apiInstance = await apiInstanceSecure();
+  const apiInstance = await apiInstanceSecure(req);
 
   try {
     const response = await apiInstance.get(path, { params: query });
@@ -31,6 +32,7 @@ export async function POST(req: NextRequest) {
   }
 
   const apiInstance = await apiInstanceSecure(
+    req,
     contentType || "application/json"
   );
 
@@ -45,7 +47,7 @@ export async function POST(req: NextRequest) {
 export async function PUT(req: NextRequest) {
   const { path } = getPathAndQuery(req);
   const body = await req.json();
-  const apiInstance = await apiInstanceSecure();
+  const apiInstance = await apiInstanceSecure(req);
 
   try {
     const response = await apiInstance.put(path, body);
@@ -58,7 +60,7 @@ export async function PUT(req: NextRequest) {
 export async function PATCH(req: NextRequest) {
   const { path } = getPathAndQuery(req);
   const body = await req.json();
-  const apiInstance = await apiInstanceSecure();
+  const apiInstance = await apiInstanceSecure(req);
 
   try {
     const response = await apiInstance.patch(path, body);
@@ -70,7 +72,7 @@ export async function PATCH(req: NextRequest) {
 
 export async function DELETE(req: NextRequest) {
   const { path } = getPathAndQuery(req);
-  const apiInstance = await apiInstanceSecure();
+  const apiInstance = await apiInstanceSecure(req);
 
   try {
     const response = await apiInstance.delete(path);

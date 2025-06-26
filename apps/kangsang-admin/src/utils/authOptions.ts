@@ -84,7 +84,6 @@ const authOptions: NextAuthOptions = {
           id: token.id,
           email: token.email,
           displayName: token.displayName,
-          accessToken: token.accessToken,
         },
         error: token?.error,
       };
