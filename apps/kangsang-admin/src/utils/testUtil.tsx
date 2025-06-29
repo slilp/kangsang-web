@@ -1,18 +1,33 @@
 import React from "react";
 import { render, RenderResult } from "@testing-library/react";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
-import ReduxProvider from "@/providers/ReduxProvider";
+import { Provider as ReduxProvider } from "react-redux";
 import AppThemeProvider from "@/providers/ThemeProvider";
+import { configureStore } from "@reduxjs/toolkit";
+import { reducers, RootState } from "@/redux/store";
 
-const customRender = (ui: React.ReactNode): RenderResult => {
+function setupStore(preloadedState?: RootState) {
+  return configureStore({
+    reducer: reducers,
+    preloadedState,
+  });
+}
+
+type CustomRenderOptions = {
+  preloadedState?: RootState;
+};
+
+const customRender = (
+  ui: React.ReactNode,
+  options?: CustomRenderOptions
+): RenderResult => {
+  const preloadedState = options?.preloadedState;
   const AllTheProviders = ({ children }: { children: React.ReactNode }) => (
-    // <NextIntlClientProvider>
     <ReactQueryProvider>
-      <ReduxProvider>
+      <ReduxProvider store={setupStore(preloadedState)}>
         <AppThemeProvider>{children}</AppThemeProvider>
       </ReduxProvider>
     </ReactQueryProvider>
-    // </NextIntlClientProvider>
   );
 
   return render(ui, { wrapper: AllTheProviders });

@@ -7,6 +7,7 @@ import {
   ListCategoryResponse,
 } from "./types";
 import apiInstanceSecure from "../apiInstanceSecure";
+import { NextRequest } from "next/server";
 
 const createCategory = async (requestBody: CreateCategoryRequest) => {
   await axios.post(`${service.secure}/category`, requestBody);
@@ -27,8 +28,8 @@ const listCategory = async (page: number, limit: number, orderBy: string) => {
   return resp.data;
 };
 
-const getById = async (categoryId: string) => {
-  const apiInstance = await apiInstanceSecure();
+const getById = async (request: NextRequest, categoryId: string) => {
+  const apiInstance = await apiInstanceSecure(request);
 
   const resp = await apiInstance.get<ICategoryInfo>(
     `/secure/category/${categoryId}`

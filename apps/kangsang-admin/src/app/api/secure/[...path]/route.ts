@@ -1,5 +1,4 @@
 import apiInstanceSecure from "@/services/apiInstanceSecure";
-import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
 const getPathAndQuery = (req: NextRequest) => {

@@ -4,6 +4,8 @@ import LoginFormSection from "../components/LoginFormSection";
 import { signIn } from "next-auth/react";
 
 vi.mock("next-auth/react", () => ({
+  __esModule: true,
+  ...vi.importActual("next-auth/react"),
   signIn: vi.fn(),
 }));
 
