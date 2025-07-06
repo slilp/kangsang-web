@@ -1,12 +1,8 @@
-import * as yup from "yup";
+import { z } from "zod";
 
-export type LoginFormType = {
-  email: string;
-  password: string;
-};
+export const loginFormValidationSchema = z.object({
+  email: z.string().min(1, "*required field").email("invalid format"),
+  password: z.string().min(1, "*required field"),
+});
 
-export const loginFormValidationSchema = () =>
-  yup.object({
-    email: yup.string().required("*required field").email("invalid format"),
-    password: yup.string().required("*required field"),
-  });
+export type LoginFormType = z.infer<typeof loginFormValidationSchema>;

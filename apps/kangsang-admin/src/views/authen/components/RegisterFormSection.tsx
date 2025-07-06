@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, Resolver, useForm } from "react-hook-form";
 import {
   Button,
@@ -32,8 +32,8 @@ function RegisterFormSection() {
   const [isHideConfirmPass, setIsHideConfirmPass] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
-  const resolver: Resolver<RegisterFormType> = yupResolver(
-    registerFormValidationSchema()
+  const resolver: Resolver<RegisterFormType> = zodResolver(
+    registerFormValidationSchema
   );
 
   const { handleSubmit, control, setValue } = useForm<RegisterFormType>({

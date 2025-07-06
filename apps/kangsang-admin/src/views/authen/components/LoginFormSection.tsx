@@ -3,7 +3,7 @@
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, Resolver, useForm } from "react-hook-form";
 import {
   Box,
@@ -28,8 +28,8 @@ function LoginFormSection() {
   const [isHidePass, setIsHidePass] = useState(true);
   const [isSinging, setIsSiging] = useState(false);
 
-  const resolver: Resolver<LoginFormType> = yupResolver(
-    loginFormValidationSchema()
+  const resolver: Resolver<LoginFormType> = zodResolver(
+    loginFormValidationSchema
   );
 
   const { handleSubmit, control } = useForm<LoginFormType>({

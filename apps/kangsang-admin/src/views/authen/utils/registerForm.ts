@@ -1,17 +1,14 @@
-import * as yup from "yup";
+import { z } from "zod";
 
-export type RegisterFormType = {
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
-
-export const registerFormValidationSchema = () =>
-  yup.object({
-    email: yup.string().required("*required field").email("invalid format"),
-    password: yup.string().required("*required field"),
-    confirmPassword: yup
-      .string()
-      .oneOf([yup.ref("password"), ""], "not match password")
-      .required("*required field"),
+export const registerFormValidationSchema = z
+  .object({
+    email: z.string().min(1, "*required field").email("invalid format"),
+    password: z.string().min(1, "*required field"),
+    confirmPassword: z.string().min(1, "*required field"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "not match password",
+    path: ["confirmPassword"],
   });
+
+export type RegisterFormType = z.infer<typeof registerFormValidationSchema>;
