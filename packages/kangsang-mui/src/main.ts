@@ -4,6 +4,7 @@ export { Button as ButtonMui } from "./stories/Button";
 //component
 export { default as ContentBox } from "./stories/atom/ContentBox";
 export { default as KangsangModal } from "./stories/component/KangsangModal";
+export { default as CommonModal } from "./stories/component/CommonModal";
 
 //layout
 export { default as FullPage } from "./stories/layout/FullPage";

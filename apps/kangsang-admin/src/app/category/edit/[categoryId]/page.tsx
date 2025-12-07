@@ -1,16 +1,18 @@
 import categoryApi from "@/services/category";
 import CategoryCreatePage from "@/views/category/pages/CategoryCreatePage";
 import { notFound } from "next/navigation";
-import { NextRequest } from "next/server";
 
-export default async function CategoryEdit(
-  { params }: { params: { categoryId: string } },
-  request: NextRequest
-) {
-  //TODO : handle loading and error
+interface CategoryEditPageProps {
+  params: Promise<{
+    categoryId: string;
+  }>;
+}
+
+export default async function CategoryEdit({ params }: CategoryEditPageProps) {
+  const { categoryId } = await params;
   let data;
   try {
-    data = await categoryApi.getById(request, (await params).categoryId);
+    data = await categoryApi.getById(categoryId);
   } catch {
     return notFound();
   }

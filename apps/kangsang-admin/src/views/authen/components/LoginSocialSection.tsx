@@ -13,7 +13,7 @@ function LoginSocialSection() {
         my={2}
       >
         <Box height="1px" width="50px" bgcolor="black" />
-        <Typography variant="body2">Fast Sign in with</Typography>
+        <Typography variant="body2">First Sign in with</Typography>
         <Box height="1px" width="50px" bgcolor="black" />
       </Box>
       <Box display="flex" gap={2} mb={2}>

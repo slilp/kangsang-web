@@ -69,6 +69,7 @@ function DashboardPage() {
               <Box component="li">Query state management</Box>
               <Box component="li">Global state management</Box>
               <Box component="li">CRUD integration</Box>
+              <Box component="li">Websocket</Box>
               <Box component="li">Turborepo</Box>
               <Box component="li">Theme setting</Box>
               <Box component="li">Layout & Responsive Design</Box>

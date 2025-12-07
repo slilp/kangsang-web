@@ -2,6 +2,7 @@ import {
   faHouse,
   faBoxOpen,
   IconDefinition,
+  faComment,
 } from "@fortawesome/free-solid-svg-icons";
 
 interface INavMenu {
@@ -71,4 +72,23 @@ const categorySection: INavMenu = {
   ],
 };
 
-export const navMenus: INavMenu[] = [dashboardSection, categorySection];
+const chatSection: INavMenu = {
+  id: "chat",
+  titleSection: "Chat",
+  roles: [],
+  mainMenus: [
+    {
+      id: "chat-menu-1",
+      title: "Chat",
+      path: "/chat",
+      icon: faComment,
+      roles: [],
+    },
+  ],
+};
+
+export const navMenus: INavMenu[] = [
+  dashboardSection,
+  categorySection,
+  chatSection,
+];
