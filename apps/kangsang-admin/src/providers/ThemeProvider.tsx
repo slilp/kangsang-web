@@ -45,7 +45,7 @@ const AppThemeProvider = ({ children }: ThemeProviderProps) => {
       <Snackbar
         data-testid="main-alert-snackbar"
         open={snackbarSelectorState.open}
-        onClose={(event, reason) => {
+        onClose={() => {
           dispatch(closeSnackbar());
         }}
         autoHideDuration={3000}

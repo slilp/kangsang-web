@@ -1,14 +1,17 @@
-//atom
-export { Button as ButtonMui } from "./stories/Button";
+// Atoms
+export { Button as ButtonMui } from "./components/Button";
+export { default as ContentBox } from "./components/atom/ContentBox";
 
-//component
-export { default as ContentBox } from "./stories/atom/ContentBox";
-export { default as KangsangModal } from "./stories/component/KangsangModal";
-export { default as CommonModal } from "./stories/component/CommonModal";
+// Components
+export { default as KangsangModal } from "./components/component/KangsangModal";
+export { default as CommonModal } from "./components/component/CommonModal";
 
-//layout
-export { default as FullPage } from "./stories/layout/FullPage";
-export { default as Center } from "./stories/layout/Center";
+// Layout
+export { default as FullPage } from "./components/layout/FullPage";
+export { default as Center } from "./components/layout/Center";
 
+// Theme
 export { dynamicTheme } from "./style/theme";
+
+// Re-export all MUI components
 export * from "@mui/material";
