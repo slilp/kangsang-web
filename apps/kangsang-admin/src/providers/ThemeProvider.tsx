@@ -2,6 +2,7 @@
 
 import { ReactNode, useEffect } from "react";
 import { Rubik } from "next/font/google";
+import { usePathname } from "next/navigation";
 import {
   Alert,
   CssBaseline,
@@ -25,19 +26,24 @@ const rubiktFont = Rubik({
 
 const AppThemeProvider = ({ children }: ThemeProviderProps) => {
   const dispatch = useAppDispatch();
+  const pathname = usePathname();
   const themeSelectorState = useAppSelector((state) => state.themeMode.theme);
   const snackbarSelectorState = useAppSelector((state) => state.snackbar);
 
+  const isLoginPage = pathname === "/login";
+
   useEffect(() => {
     const themeLocalStorage = getThemeStorage();
-    if (themeLocalStorage === "dark") {
+    if (themeLocalStorage === "dark" && !isLoginPage) {
       dispatch(changeTheme(true));
+    } else if (isLoginPage) {
+      dispatch(changeTheme(false));
     }
-  }, []);
+  }, [isLoginPage]);
 
   return (
     <ThemeProvider
-      theme={dynamicTheme(themeSelectorState, {
+      theme={dynamicTheme(isLoginPage ? "light" : themeSelectorState, {
         fontFamily: rubiktFont.style.fontFamily,
       })}
     >

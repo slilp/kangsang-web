@@ -1,8 +1,13 @@
 {
   "name": "kangsang-mui",
   "private": true,
+  "main": "./src/main.ts",
+  "types": "./src/main.ts",
   "exports": {
-    ".": "./src/main.ts"
+    ".": {
+      "types": "./src/main.ts",
+      "default": "./src/main.ts"
+    }
   },
   "version": "0.0.0",
   "scripts": {
